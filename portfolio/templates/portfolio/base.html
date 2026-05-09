@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>{{ site_title }}</title>
+    <meta name="description" content="{{ meta_description }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ site_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    {% if config and config.og_image %}
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ config.og_image.url }}">
+    {% endif %}
+
+    <!-- Favicon (Browser Tab Icon) -->
+    {% if config and config.profile_image %}
+    <link rel="icon" type="image/x-icon" href="{{ config.profile_image.url }}">
+    <link rel="apple-touch-icon" href="{{ config.profile_image.url }}">
+    {% elif config and config.og_image %}
+    <link rel="icon" type="image/x-icon" href="{{ config.og_image.url }}">
+    <link rel="apple-touch-icon" href="{{ config.og_image.url }}">
+    {% endif %}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+</head>
+
+<body>
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-brand-logo">
+                <div class="brand-mark">MN</div>
+                <div class="brand-type">
+                    <span class="brand-first">Moataz</span>
+                    <span class="brand-last">Nageh</span>
+                </div>
+            </a>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active" title="Home"><i
+                            class="fa-solid fa-house"></i><span>Home</span></a></li>
+                <li><a href="#about" class="nav-link" title="About"><i
+                            class="fa-solid fa-user"></i><span>About</span></a></li>
+                <li><a href="#experience" class="nav-link" title="Experience"><i
+                            class="fa-solid fa-briefcase"></i><span>Experience</span></a></li>
+                <li><a href="#skills" class="nav-link" title="Skills"><i
+                            class="fa-solid fa-code"></i><span>Skills</span></a></li>
+                <li><a href="#projects" class="nav-link" title="Projects"><i
+                            class="fa-solid fa-folder-open"></i><span>Projects</span></a></li>
+                <li><a href="#certificates" class="nav-link" title="Certificates"><i
+                            class="fa-solid fa-certificate"></i><span>Certificates</span></a></li>
+                <li><a href="#contact" class="nav-link" title="Contact"><i
+                            class="fa-solid fa-envelope"></i><span>Contact</span></a></li>
+            </ul>
+
+            <!-- Dark Mode Toggle -->
+            <button class="dark-mode-toggle" id="dark-mode-toggle" title="Toggle Dark Mode">
+                <i class="fa-solid fa-moon" id="dark-mode-icon"></i>
+            </button>
+
+            <!-- Mobile Hamburger -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">Moataz Nageh</span>
+                    <p>AI Engineer</p>
+                </div>
+                <div class="footer-links">
+                    {% for link in social_links %}
+                    <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+                        title="{{ link.get_platform_display }}">
+                        <i class="{{ link.icon_class }}"></i>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Moataz Nageh Saber. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="{% static 'portfolio/js/script.js' %}"></script>
+</body>
+
+</html>
