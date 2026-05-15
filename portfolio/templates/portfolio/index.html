@@ -222,12 +222,30 @@
                     <div class="project-icon"><i class="fa-solid fa-code-branch"></i></div>
                     <h3>{{ project.title }}</h3>
                 </div>
-                <p>{{ project.description }}</p>
-                {% if project.github_link %}
-                <a href="{{ project.github_link }}" target="_blank" class="btn btn-sm">
-                    <i class="fa-brands fa-github"></i> View on GitHub
-                </a>
-                {% endif %}
+                <div class="project-body">
+                    <p class="project-description">{{ project.description }}</p>
+
+                    {% if project.tech_stack %}
+                    <div class="project-tech">
+                        <h4>Tech Stack</h4>
+                        <div class="tech-badges">
+                            {% for tech in project.tech_stack %}
+                            <span class="tech-badge">
+                                <i class="{{ tech.icon_class }}"></i>
+                                {{ tech.name }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="project-actions">
+                    {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank" class="btn btn-sm">
+                        <i class="fa-brands fa-github"></i> View on GitHub
+                    </a>
+                    {% endif %}
+                </div>
             </div>
             {% endfor %}
         </div>

@@ -9,6 +9,38 @@ from .models import (
 )
 
 
+TECH_BADGE_DEFINITIONS = [
+    ('Python', 'fa-brands fa-python', ('python',)),
+    ('Django', 'fa-solid fa-code', ('django',)),
+    ('Power BI', 'fa-solid fa-chart-pie', ('power bi', 'powerbi')),
+    ('TensorFlow', 'fa-solid fa-brain', ('tensorflow', 'tensor flow')),
+    ('PyTorch', 'fa-solid fa-fire', ('pytorch', 'torch')),
+    ('BERT', 'fa-solid fa-language', ('bert',)),
+    ('NLP', 'fa-solid fa-comments', ('nlp', 'sentiment')),
+    ('OpenCV', 'fa-solid fa-eye', ('opencv', 'computer vision')),
+    ('YOLOv8', 'fa-solid fa-crosshairs', ('yolov8', 'yolo')),
+    ('TensorRT', 'fa-solid fa-microchip', ('tensorrt', 'edge deployment')),
+    ('XGBoost', 'fa-solid fa-chart-line', ('xgboost',)),
+    ('Flask', 'fa-solid fa-flask', ('flask',)),
+    ('REST API', 'fa-solid fa-plug', ('rest api', 'api')),
+    ('SQL', 'fa-solid fa-database', ('sql',)),
+    ('Machine Learning', 'fa-solid fa-robot', ('machine learning', 'predict')),
+    ('Data Analysis', 'fa-solid fa-magnifying-glass-chart', ('data analysis', 'dashboard')),
+]
+
+
+def attach_project_tech_stack(projects):
+    """Attach display-ready tech badge metadata without changing the database schema."""
+    for project in projects:
+        searchable_text = f'{project.title} {project.description}'.lower()
+        project.tech_stack = [
+            {'name': name, 'icon_class': icon_class}
+            for name, icon_class, keywords in TECH_BADGE_DEFINITIONS
+            if any(keyword in searchable_text for keyword in keywords)
+        ]
+    return projects
+
+
 def index(request):
     """
     Main portfolio page view.
@@ -20,7 +52,7 @@ def index(request):
     except SiteConfig.DoesNotExist:
         config = None
 
-    projects = Project.objects.all()
+    projects = attach_project_tech_stack(Project.objects.all())
     certificates = Certificate.objects.all()
     testimonials = Testimonial.objects.all()
     social_links = SocialLink.objects.all()
