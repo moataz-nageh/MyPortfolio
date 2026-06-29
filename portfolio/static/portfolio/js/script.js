@@ -24,7 +24,10 @@ function initTypingAnimation() {
     const typingElement = document.getElementById('typing-text');
     if (!typingElement) return;
 
-    const roles = ['AI Engineer', 'Data Analyst'];
+    const rolesElement = document.getElementById('hero-roles-data');
+    const roles = rolesElement ? JSON.parse(rolesElement.textContent).filter(Boolean) : [];
+    if (!roles.length) return;
+
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;

@@ -20,13 +20,8 @@
     {% endif %}
 
     <!-- Favicon (Browser Tab Icon) -->
-    {% if config and config.profile_image %}
-    <link rel="icon" type="image/x-icon" href="{{ config.profile_image.url }}">
-    <link rel="apple-touch-icon" href="{{ config.profile_image.url }}">
-    {% elif config and config.og_image %}
-    <link rel="icon" type="image/x-icon" href="{{ config.og_image.url }}">
-    <link rel="apple-touch-icon" href="{{ config.og_image.url }}">
-    {% endif %}
+    <link rel="icon" type="image/png" href="{% static 'portfolio/img/favicon-circle.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'portfolio/img/apple-touch-icon.png' %}">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,7 +104,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Moataz Nageh Saber. All rights reserved.</p>
+                <p>&copy; 2025 Moataz Nageh. All rights reserved.</p>
             </div>
         </div>
     </footer>

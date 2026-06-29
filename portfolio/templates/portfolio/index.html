@@ -15,14 +15,15 @@
                 {{ name_parts|slice:":-1"|join:" " }} <span class="highlight">{{ name_parts|last }}</span>
                 {% endwith %}
                 {% else %}
-                Moataz Nageh <span class="highlight">Saber</span>
+                Moataz <span class="highlight">Nageh</span>
                 {% endif %}
             </h1>
             <div class="hero-typing">
-                <span class="typing-prefix">I'm a </span>
+                <span class="typing-prefix">I'm </span>
                 <span class="typing-text" id="typing-text"></span>
                 <span class="typing-cursor">|</span>
             </div>
+            {{ hero_roles|json_script:"hero-roles-data" }}
             <p class="hero-description">
                 {% if config and config.hero_description %}
                 {{ config.hero_description }}
@@ -40,8 +41,8 @@
                     <i class="fa-solid fa-file-pdf"></i> Open CV
                 </a>
                 {% endif %}
-                <a href="#projects" class="btn btn-outline">
-                    <i class="fa-solid fa-arrow-down"></i> View Projects
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fa-solid fa-envelope"></i> Contact me
                 </a>
             </div>
         </div>
@@ -49,7 +50,7 @@
             <div class="image-wrapper">
                 <div class="image-glow"></div>
                 {% if config and config.profile_image %}
-                <img src="{{ config.profile_image.url }}" alt="Moataz Nageh Saber" class="profile-img floating"
+                <img src="{{ config.profile_image.url }}" alt="Moataz Nageh" class="profile-img floating"
                     loading="lazy">
                 {% else %}
                 <div class="profile-placeholder floating">
@@ -225,11 +226,12 @@
                 <div class="project-body">
                     <p class="project-description">{{ project.description }}</p>
 
-                    {% if project.tech_stack %}
+                    {% with tech_stack=project.tech_stack.all %}
+                    {% if tech_stack %}
                     <div class="project-tech">
                         <h4>Tech Stack</h4>
                         <div class="tech-badges">
-                            {% for tech in project.tech_stack %}
+                            {% for tech in tech_stack %}
                             <span class="tech-badge">
                                 <i class="{{ tech.icon_class }}"></i>
                                 {{ tech.name }}
@@ -238,6 +240,7 @@
                         </div>
                     </div>
                     {% endif %}
+                    {% endwith %}
                 </div>
                 <div class="project-actions">
                     {% if project.github_link %}

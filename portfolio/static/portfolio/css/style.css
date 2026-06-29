@@ -382,10 +382,7 @@ img {
 }
 
 .hero-name .highlight {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: inherit;
 }
 
 .hero-typing {
@@ -878,7 +875,6 @@ img {
 
 .project-card {
     height: 100%;
-    min-height: 580px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 45%), var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 18px;
@@ -965,7 +961,7 @@ img {
 
 .project-body {
     display: flex;
-    flex: 1;
+    flex: 1 1 auto;
     flex-direction: column;
     gap: 24px;
     padding: 18px 30px 0;
@@ -975,7 +971,7 @@ img {
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.85;
-    flex: 1;
+    flex: 1 1 auto;
     letter-spacing: 0;
 }
 
@@ -1032,6 +1028,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     min-height: 86px;
     padding: 22px 30px 30px;
     margin-top: auto;
@@ -1576,10 +1573,6 @@ body.dark-mode .cursor-glow.hovered {
 
     .projects-grid {
         grid-template-columns: 1fr;
-    }
-
-    .project-card {
-        min-height: auto;
     }
 
     .testimonials-grid {

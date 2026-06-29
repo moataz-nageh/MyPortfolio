@@ -14,14 +14,14 @@ class SiteConfig(models.Model):
     """
     site_title = models.CharField(
         max_length=200,
-        default='Moataz Nageh Saber | AI Engineer Portfolio'
+        default='Moataz Nageh | AI Engineer Portfolio'
     )
     meta_description = models.TextField(
-        default='Portfolio of Moataz Nageh Saber — AI Engineer, '
+        default='Portfolio of Moataz Nageh — AI Engineer, '
                 'and Data Analyst.'
     )
     og_image = models.ImageField(upload_to='site/', blank=True, null=True)
-    name = models.CharField(max_length=200, default='Moataz Nageh Saber')
+    name = models.CharField(max_length=200, default='Moataz Nageh')
     hero_description = models.TextField(
         default='Transforming data into intelligent solutions through Machine Learning, AI, and advanced analytics.'
     )
@@ -49,6 +49,20 @@ class SiteConfig(models.Model):
         return 'Site Configuration'
 
 
+class HeroRole(models.Model):
+    """Role title shown in the hero typing animation."""
+    title = models.CharField(max_length=100)
+    display_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order', 'id']
+        verbose_name = 'Hero role'
+        verbose_name_plural = 'Hero roles'
+
+    def __str__(self):
+        return self.title
+
+
 class Project(models.Model):
     """Portfolio project entry."""
     title = models.CharField(max_length=200)
@@ -63,6 +77,29 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ProjectTechStack(models.Model):
+    """Manually managed technology badge for a portfolio project."""
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name='tech_stack'
+    )
+    name = models.CharField(max_length=100)
+    icon_class = models.CharField(
+        max_length=100,
+        help_text='Font Awesome class, e.g. "fa-brands fa-python"'
+    )
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name = 'Project tech stack item'
+        verbose_name_plural = 'Project tech stack items'
+
+    def __str__(self):
+        return f'{self.project.title} - {self.name}'
 
 
 class Certificate(models.Model):

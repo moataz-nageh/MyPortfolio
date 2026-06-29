@@ -14,12 +14,12 @@ class Command(BaseCommand):
 
         # --- Site Configuration ---
         SiteConfig.objects.update_or_create(pk=1, defaults={
-            'site_title': 'Moataz Nageh Saber | AI Engineer Portfolio',
+            'site_title': 'Moataz Nageh | AI Engineer Portfolio',
             'meta_description': (
-                'Portfolio of Moataz Nageh Saber — AI Engineer, '
+                'Portfolio of Moataz Nageh — AI Engineer, '
                 'and Data Analyst. Explore projects, skills, and experience.'
             ),
-            'name': 'Moataz Nageh Saber',
+            'name': 'Moataz Nageh',
             'hero_description': 'Transforming data into intelligent solutions through Machine Learning, AI, and advanced analytics.',
             'about_me': (
                 'Machine Learning–focused Data Scientist with strong expertise in building, evaluating, and deploying '
